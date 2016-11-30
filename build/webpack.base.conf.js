@@ -9,11 +9,11 @@ var env = process.env.NODE_ENV
 var cssSourceMapDev = (env === 'development' && config.dev.cssSourceMap)
 var cssSourceMapProd = (env === 'production' && config.build.productionSourceMap)
 var useCssSourceMap = cssSourceMapDev || cssSourceMapProd
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   entry: {
-    app: './src/main.js',
-		fontawesome: 'font-awesome-webpack!./config/font-awesome.config.js'
+    app: './src/main.js'
   },
   output: {
     path: config.build.assetsRoot,
@@ -39,13 +39,13 @@ module.exports = {
         test: /\.vue$/,
         loader: 'eslint',
         include: projectRoot,
-        exclude: /node_modules/
+        exclude: /node_modules(?![\\/]vue-awesome[\\/])/
       },
       {
         test: /\.js$/,
         loader: 'eslint',
         include: projectRoot,
-        exclude: /node_modules/
+        exclude: /node_modules(?![\\/]vue-awesome[\\/])/
       }
     ],
     loaders: [
@@ -57,7 +57,7 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel',
         include: projectRoot,
-        exclude: /node_modules/
+        exclude: /node_modules(?![\\/]vue-awesome[\\/])/
       },
       {
         test: /\.json$/,
@@ -79,10 +79,6 @@ module.exports = {
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       },
-      // the url-loader uses DataUrls. 
-      // the file-loader emits files. 
-      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&minetype=application/font-woff" },
-      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }
     ]
   },
   eslint: {

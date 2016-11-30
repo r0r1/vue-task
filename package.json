@@ -17,6 +17,8 @@
     "bootstrap-sass-loader": "^1.0.10",
     "font-awesome-webpack": "0.0.4",
     "vue": "^2.1.0",
+    "vue-awesome": "^2.0.3",
+    "vue-strap": "^1.1.32",
     "vuex": "^2.0.0"
   },
   "devDependencies": {
@@ -59,6 +61,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.26",
     "karma-webpack": "^1.7.0",
+    "less-loader": "^2.2.3",
     "lolex": "^1.4.0",
     "mocha": "^3.1.0",
     "nightwatch": "^0.9.8",
