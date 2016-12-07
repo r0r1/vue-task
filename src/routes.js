@@ -24,11 +24,11 @@ export default [
     component: User,
     children: [
       {
-        path: '/list',
+        path: 'list',
         component: UserList,
       },
       {
-        path: '/new',
+        path: 'new',
         component: UserNew,
       },
     ],
@@ -38,11 +38,11 @@ export default [
     component: Task,
     children: [
       {
-        path: '/list',
+        path: 'list',
         component: TaskList,
       },
       {
-        path: '/new',
+        path: 'new',
         component: TaskNew,
       },
     ],
