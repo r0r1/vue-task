@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import Icon from 'vue-awesome/components/Icon';
 
 export default {
   name: 'hello',
@@ -16,9 +15,6 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js Task App',
     };
-  },
-  components: {
-    icon: Icon,
   },
 };
 </script>
