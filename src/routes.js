@@ -5,6 +5,10 @@ import Setting from './components/settings/Setting';
 import User from './components/users/User';
 import UserList from './components/users/UserList';
 import UserNew from './components/users/UserNew';
+// Task
+import Task from './components/tasks/Task';
+import TaskList from './components/tasks/TaskList';
+import TaskNew from './components/tasks/TaskNew';
 
 export default [
   {
@@ -26,6 +30,20 @@ export default [
       {
         path: '/new',
         component: UserNew,
+      },
+    ],
+  },
+  {
+    path: '/tasks',
+    component: Task,
+    children: [
+      {
+        path: '/list',
+        component: TaskList,
+      },
+      {
+        path: '/new',
+        component: TaskNew,
       },
     ],
   },
