@@ -13,6 +13,8 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   entry: {
+    fontawesome: 'font-awesome-loader',
+    bootstrap: 'bootstrap-loader/lib/bootstrap.loader?configFilePath=!./config/bs3.yml',
     app: './src/main.js'
   },
   output: {
@@ -70,6 +72,18 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
+      },
+      {
+        test: /\.css$/,
+        loaders: ['style', 'css']
+      }, 
+      {
+        test: /\.scss$/,
+        loaders: ['style', 'css', 'postcss', 'sass']
+      }, 
+      {
+        test: /\.less$/,
+        loaders: ['style', 'css', 'less']
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
