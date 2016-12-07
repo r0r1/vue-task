@@ -1,28 +1,36 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+  <div id="admin-lte">
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+    <app-content></app-content>
+    <app-footer></app-footer>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello';
+import AppHeader from './components/layouts/Header';
+import AppSidebar from './components/layouts/Sidebar';
+import AppContent from './components/layouts/Content';
+import AppFooter from './components/layouts/Footer';
+import Menus from './../config/menus';
 
 export default {
-  name: 'app',
+  name: 'App',
+  data() {
+    return {
+      login: true,
+      title: null,
+      menus: Menus,
+    };
+  },
   components: {
-    Hello,
+    AppHeader,
+    AppSidebar,
+    AppContent,
+    AppFooter,
   },
 };
 </script>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style src="../static/adminLte/css/skins/_all-skins.min.css"></style>
+<style src="../static/adminLte/css/AdminLTE.min.css"></style>
