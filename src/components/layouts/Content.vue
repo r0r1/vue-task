@@ -8,9 +8,7 @@
       <!-- Main content -->
       <section class="content">
         <transition>
-          <keep-alive>
-            <router-view></router-view>
-          </keep-alive>
+          <router-view></router-view>
         </transition>
       </section>
     <!-- /.content -->
