@@ -5,9 +5,9 @@
         <div class="box-header with-border">
           <h3 class="box-title">Task List</h3>
           <div class="box-tools pull-right">
-            <a href="" class="btn btn-info">
-              <i class="fa fa-plus"></i>Add Task
-            </a>
+            <router-link to="/tasks/new" class="btn btn-info">
+              <i class="fa fa-plus"></i> Add Task
+            </router-link>
           </div><!-- /.box-tools -->
         </div><!-- /.box-header -->
         <div class="box-body">
