@@ -1,8 +1,17 @@
 <template>
   <div class="row">
     <div class="col-sm-12 col-md-12">
+      <div v-if="errors.length > 0">
+        <div  class="alert alert-danger">
+          <a href="#" class="close" data-dismiss="alert">&times;</a>
+          <ul v-for="msg in errors">
+              <li>Name is required</li>
+          </ul>
+        </div>
+      </div>
+      
       <div class="box">
-        <form class="form-horizontal" v-on:submit="addTask()" action="#">
+        <form class="form-horizontal" v-on:submit.prevent="addTask()" novalidate>
           <div class="box-body">
             <div class="form-group">
               <label for="name" class="col-sm-2 control-label">Name</label>
@@ -82,10 +91,20 @@
           { text: '5', value: '5' },
         ],
         allStatus: this.getStatus() || [],
+        errors: [],
       };
     },
     methods: {
       addTask() {
+        this.errors = [];
+        this.$http.post('http://localhost:8080/v1/tasks', this.task)
+        .then((response) => {
+          if (response.data.id) {
+            this.$router.replace('/tasks/list');
+          }
+        }, (res) => {
+          this.errors.push(res.data);
+        });
       },
       getStatus() {
         this.$http.get('http://localhost:8080/v1/status').then((response) => {
