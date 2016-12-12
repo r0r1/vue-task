@@ -24,7 +24,20 @@
               <label for="parent" class="col-sm-2 control-label">Parent</label>
               <div class="col-sm-10">
                 <select class="form-control" v-model="task.parent" id="parent">
-                  <option value="0">Parent</option>
+                  <option v-for="p in allParent" v-bind:value="p.Id">
+                    {{ p.Name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="parent" class="col-sm-2 control-label">User</label>
+              <div class="col-sm-10">
+                <select class="form-control" v-model="task.user" id="user">
+                  <option v-for="u in allUser" v-bind:value="u.Id">
+                    {{ u.Name }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -84,13 +97,15 @@
           priority: null,
         },
         priorities: [
-          { text: '1', value: '1' },
-          { text: '2', value: '2' },
-          { text: '3', value: '3' },
-          { text: '4', value: '4' },
-          { text: '5', value: '5' },
+          { text: '1', value: 1 },
+          { text: '2', value: 2 },
+          { text: '3', value: 3 },
+          { text: '4', value: 4 },
+          { text: '5', value: 5 },
         ],
         allStatus: this.getStatus() || [],
+        allUser: this.getUsers() || [],
+        allParent: this.getParents(),
         errors: [],
       };
     },
@@ -109,6 +124,24 @@
       getStatus() {
         this.$http.get('http://localhost:8080/v1/status').then((response) => {
           this.allStatus = response.data;
+        });
+      },
+      getUsers() {
+        this.$http.get('http://localhost:8080/v1/users').then((response) => {
+          this.allUser = response.data;
+        });
+      },
+      getParents() {
+        this.$http.get('http://localhost:8080/v1/tasks').then((response) => {
+          const defaultParent = [{ id: 0, Name: 'Parent' }];
+          if (response.data == null) {
+            this.allParent = defaultParent;
+          } else {
+            this.allParent = defaultParent;
+            response.data.forEach((val) => {
+              this.allParent.push(val);
+            });
+          }
         });
       },
     },
