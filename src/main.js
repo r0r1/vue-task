@@ -6,6 +6,7 @@ import VuetablePagination from 'vuetable-2/src/components/VuetablePagination';
 import VuetablePaginationDropdown from 'vuetable-2/src/components/VuetablePaginationDropdown';
 import App from './App';
 import Router from './routes';
+import AuthService from './services/auth';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
@@ -20,6 +21,28 @@ const router = new VueRouter({
   routes: Router,
 });
 
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.auth)) {
+    console.log('check meta');
+    // this route requires auth, check if logged in
+    // if not, redirect to login page
+    AuthService.checkAuth();
+    console.log(AuthService.user.authenticated);
+    if (!AuthService.user.authenticated) {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath },
+      });
+    } else {
+      next();
+    }
+  } else {
+    next(); // make sure to always call next()!
+  }
+});
+
+export default router;
+
 /* eslint-disable no-new */
 new Vue({
   router,
@@ -27,3 +50,4 @@ new Vue({
   template: '<App/>',
   components: { App },
 });
+
