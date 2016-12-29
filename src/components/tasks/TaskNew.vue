@@ -112,7 +112,7 @@
     methods: {
       addTask() {
         this.errors = [];
-        this.$http.post('http://localhost:8080/v1/tasks', this.task)
+        this.$http.post('http://localhost:8080/api/v1/tasks', this.task)
         .then((response) => {
           if (response.data.id) {
             this.$router.replace('/tasks/list');
@@ -122,17 +122,17 @@
         });
       },
       getStatus() {
-        this.$http.get('http://localhost:8080/v1/status').then((response) => {
+        this.$http.get('http://localhost:8080/api/v1/statuses').then((response) => {
           this.allStatus = response.data;
         });
       },
       getUsers() {
-        this.$http.get('http://localhost:8080/v1/users').then((response) => {
+        this.$http.get('http://localhost:8080/api/v1/users').then((response) => {
           this.allUser = response.data;
         });
       },
       getParents() {
-        this.$http.get('http://localhost:8080/v1/tasks').then((response) => {
+        this.$http.get('http://localhost:8080/api/v1/tasks').then((response) => {
           const defaultParent = [{ id: 0, Name: 'Parent' }];
           if (response.data == null) {
             this.allParent = defaultParent;

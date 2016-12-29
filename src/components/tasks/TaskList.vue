@@ -63,7 +63,7 @@
     },
     methods: {
       getData() {
-        this.$http.get('http://localhost:8080/v1/tasks')
+        this.$http.get('http://localhost:8080/api/v1/tasks')
           .then((response) => {
             if (response.data == null) {
               this.tasks = [];
