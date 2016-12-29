@@ -16,39 +16,47 @@ export default [
     component: Login,
   },
   {
-    path: '/',
+    path: '/dashboard',
     component: Dashboard,
+    meta: { auth: true },
   },
   {
     path: '/users',
     component: User,
+    meta: { auth: true },
     children: [
       {
         path: 'list',
         component: UserList,
+        meta: { auth: true },
       },
       {
         path: 'new',
         component: UserNew,
+        meta: { auth: true },
       },
     ],
   },
   {
     path: '/tasks',
     component: Task,
+    meta: { auth: true },
     children: [
       {
         path: 'list',
         component: TaskList,
+        meta: { auth: true },
       },
       {
         path: 'new',
         component: TaskNew,
+        meta: { auth: true },
       },
     ],
   },
   {
     path: '/settings',
     component: Setting,
+    meta: { auth: true },
   },
 ];

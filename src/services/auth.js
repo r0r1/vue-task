@@ -17,27 +17,29 @@ export default {
 
   // Send a request to the login URL and save the returned JWT
   login(context, creds, redirect) {
-    context.$http.post(LOGIN_URL, creds, (data) => {
-      localStorage.setItem('token', data.token);
-      this.user.authenticated = true;
-
-      // Redirect to a specified route
-      if (redirect) {
-        router.replace(redirect);
-      }
-    }).error((err) => {
-      context.error = err;
-    });
+    context.$http.post(LOGIN_URL, creds)
+      .then((res) => {
+        if (res.data.token) {
+          localStorage.setItem('token', res.data.token);
+          this.user.authenticated = true;
+          router.replace(redirect);
+        }
+      }, (err) => {
+        const errors = JSON.parse(err.data);
+        context.errors.push(errors);
+      });
   },
 
   signup(context, creds, redirect) {
-    context.$http.post(SIGNUP_URL, creds, (data) => {
-      if (data.id) {
-        router.go(redirect);
-      }
-    }).error((err) => {
-      context.error = err;
-    });
+    context.$http.post(SIGNUP_URL, creds)
+      .then((data) => {
+        if (data.id) {
+          router.go(redirect);
+        }
+      }, (err) => {
+        const errors = JSON.parse(err.data);
+        context.errors.push(errors);
+      });
   },
 
   // To log out, we just need to remove the token
