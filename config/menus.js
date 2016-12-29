@@ -1,7 +1,7 @@
 export default [
   {
     name: 'Dashboard',
-    link: '/',
+    link: '/dashboard',
     icon: 'fa fa-home',
   },
   {
