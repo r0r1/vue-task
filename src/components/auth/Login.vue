@@ -1,7 +1,7 @@
 <template>
   <div class="login-box">
     <div class="login-logo">
-      <a router-link to="/"><b>Admin</b> LTE</a>
+      <a router-link to="/"><b>App Task Management</b></a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -35,13 +35,19 @@
         </div>
         
       </form>
+      <div class="social-auth-links text-center">
+        <p>- OR -</p>
+      </div>
+      <router-link to="/register" class="text-center">
+        Register a new membership
+      </router-link>
     </div>
   </div>   
 </template>
 
 <script>
 
-import authService from './../services/auth';
+import authService from './../../services/auth';
 
 export default {
   name: 'Login',

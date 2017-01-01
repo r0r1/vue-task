@@ -7,7 +7,7 @@
   </div>
 
   <div v-else>
-    <login></login>
+    <app-master></app-master>
   </div>
 </template>
 
@@ -18,7 +18,7 @@ import AppSidebar from './components/layouts/Sidebar';
 import AppContent from './components/layouts/Content';
 import AppFooter from './components/layouts/Footer';
 import Menus from './../config/menus';
-import Login from './components/Login';
+import AppMaster from './components/auth/Auth';
 
 export default {
   name: 'App',
@@ -33,7 +33,7 @@ export default {
     AppSidebar,
     AppContent,
     AppFooter,
-    Login,
+    AppMaster,
   },
   computed: mapGetters([
     'login',

@@ -1,5 +1,6 @@
-import Login from './components/Login';
-import Dashboard from './components/Dashboard';
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
+import Dashboard from './components/dashboard/Dashboard';
 import Setting from './components/settings/Setting';
 // User
 import User from './components/users/User';
@@ -14,6 +15,10 @@ export default [
   {
     path: '/login',
     component: Login,
+  },
+  {
+    path: '/register',
+    component: Register,
   },
   {
     path: '/dashboard',

@@ -39,6 +39,7 @@ export default {
         }
       }, (err) => {
         const errors = JSON.parse(err.data);
+        console.log(errors);
         context.errors.push(errors);
       });
   },
