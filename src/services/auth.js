@@ -26,29 +26,38 @@ export default {
           router.replace(redirect);
         }
       }, (err) => {
-        const errors = JSON.parse(err.data);
-        context.errors.push(errors);
+        if (typeof err.data === 'object') {
+          context.errors.push(err.data);
+        } else {
+          const errors = JSON.parse(err.data);
+          context.errors.push(errors);
+        }
       });
   },
 
   signup(context, creds, redirect) {
     context.$http.post(SIGNUP_URL, creds)
-      .then((data) => {
-        if (data.id) {
-          router.go(redirect);
+      .then((res) => {
+        if (res.data.ID === 0) {
+          context.errors.push('Email already registered.');
+        }
+        if (res.data.ID && res.data.ID !== 0) {
+          router.replace(redirect);
+          context.$store.dispatch('addSuccessMessage', 'Register has been successful, please login.');
         }
       }, (err) => {
         const errors = JSON.parse(err.data);
-        console.log(errors);
+        context.$store.dispatch('addErrorMessages', errors);
         context.errors.push(errors);
       });
   },
 
   // To log out, we just need to remove the token
-  logout(context) {
+  logout(context, redirect) {
     localStorage.removeItem('token');
     this.user.authenticated = false;
     context.$store.dispatch('logout');
+    router.replace(redirect);
   },
 
   checkAuth() {
