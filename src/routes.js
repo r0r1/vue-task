@@ -21,6 +21,11 @@ export default [
     component: Register,
   },
   {
+    path: '/',
+    component: Dashboard,
+    meta: { auth: true },
+  },
+  {
     path: '/dashboard',
     component: Dashboard,
     meta: { auth: true },
