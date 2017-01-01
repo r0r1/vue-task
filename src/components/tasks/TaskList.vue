@@ -54,24 +54,19 @@
 </template>
 
 <script>
-  export default {
-    name: 'TaskList',
-    data() {
-      return {
-        tasks: this.getData() || [],
-      };
+import taskService from './../../services/task';
+
+export default {
+  name: 'TaskList',
+  data() {
+    return {
+      tasks: this.getData() || [],
+    };
+  },
+  methods: {
+    getData() {
+      taskService.all(this);
     },
-    methods: {
-      getData() {
-        this.$http.get('http://localhost:8080/api/v1/tasks')
-          .then((response) => {
-            if (response.data == null) {
-              this.tasks = [];
-            } else {
-              this.tasks = response.data;
-            }
-          });
-      },
-    },
-  };
+  },
+};
 </script>

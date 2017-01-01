@@ -24,14 +24,14 @@
               <label for="parent" class="col-sm-2 control-label">Parent</label>
               <div class="col-sm-10">
                 <select class="form-control" v-model="task.parent" id="parent">
-                  <option v-for="p in allParent" v-bind:value="p.Id">
-                    {{ p.Name }}
+                  <option v-for="p in items" v-bind:value="p.ID">
+                    {{ p.name }}
                   </option>
                 </select>
               </div>
             </div>
 
-            <div class="form-group">
+            <!--<div class="form-group">
               <label for="parent" class="col-sm-2 control-label">User</label>
               <div class="col-sm-10">
                 <select class="form-control" v-model="task.user" id="user">
@@ -40,7 +40,7 @@
                   </option>
                 </select>
               </div>
-            </div>
+            </div>-->
 
             <div class="form-group">
               <label for="priority_id" class="col-sm-2 control-label">Priority</label>
@@ -57,8 +57,8 @@
               <label for="priority_id" class="col-sm-2 control-label">Status</label>
               <div class="col-sm-10">
                 <select class="form-control" v-model="task.status" id="status">
-                  <option v-for="s in allStatus" v-bind:value="s.Id">
-                    {{ s.Name }}
+                  <option v-for="s in allStatus" v-bind:value="s.value">
+                    {{ s.text }}
                   </option>
                 </select>
               </div>
@@ -85,65 +85,49 @@
 </template>
 
 <script>
-  export default {
-    name: 'TaskNew',
-    data() {
-      return {
-        task: {
-          name: null,
-          description: null,
-          parent: null,
-          status: null,
-          priority: null,
-        },
-        priorities: [
-          { text: '1', value: 1 },
-          { text: '2', value: 2 },
-          { text: '3', value: 3 },
-          { text: '4', value: 4 },
-          { text: '5', value: 5 },
-        ],
-        allStatus: this.getStatus() || [],
-        allUser: this.getUsers() || [],
-        allParent: this.getParents(),
-        errors: [],
-      };
+import taskService from './../../services/task';
+// import userService from './../../services/user';
+
+export default {
+  name: 'TaskNew',
+  data() {
+    return {
+      task: {
+        name: null,
+        description: null,
+        parent: null,
+        status: null,
+        priority: null,
+      },
+      priorities: [
+        { text: '1', value: 1 },
+        { text: '2', value: 2 },
+        { text: '3', value: 3 },
+        { text: '4', value: 4 },
+        { text: '5', value: 5 },
+      ],
+      allStatus: [
+        { text: 'Progress', value: 'progress' },
+        { text: 'Pending', value: 'pending' },
+        { text: 'Complete', value: 'complete' },
+      ],
+      allUser: this.getUsers() || [],
+      items: this.getParents() || [],
+      errors: [],
+    };
+  },
+  methods: {
+    addTask() {
+      this.errors = [];
+      taskService.store(this, this.task, '/tasks/list');
     },
-    methods: {
-      addTask() {
-        this.errors = [];
-        this.$http.post('http://localhost:8080/api/v1/tasks', this.task)
-        .then((response) => {
-          if (response.data.id) {
-            this.$router.replace('/tasks/list');
-          }
-        }, (res) => {
-          this.errors.push(res.data);
-        });
-      },
-      getStatus() {
-        this.$http.get('http://localhost:8080/api/v1/statuses').then((response) => {
-          this.allStatus = response.data;
-        });
-      },
-      getUsers() {
-        this.$http.get('http://localhost:8080/api/v1/users').then((response) => {
-          this.allUser = response.data;
-        });
-      },
-      getParents() {
-        this.$http.get('http://localhost:8080/api/v1/tasks').then((response) => {
-          const defaultParent = [{ id: 0, Name: 'Parent' }];
-          if (response.data == null) {
-            this.allParent = defaultParent;
-          } else {
-            this.allParent = defaultParent;
-            response.data.forEach((val) => {
-              this.allParent.push(val);
-            });
-          }
-        });
-      },
+    getUsers() {
+      // this.allUser = userService.all(this);
     },
-  };
+    getParents() {
+      taskService.all(this);
+      console.log(this.items);
+    },
+  },
+};
 </script>
