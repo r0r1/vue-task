@@ -7,6 +7,7 @@ import VuetablePaginationDropdown from 'vuetable-2/src/components/VuetablePagina
 import App from './App';
 import Router from './routes';
 import AuthService from './services/auth';
+import store from './store';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
@@ -48,6 +49,7 @@ new Vue({
   router,
   el: '#app',
   template: '<App/>',
+  store,
   components: { App },
 });
 
