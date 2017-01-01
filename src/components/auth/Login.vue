@@ -6,6 +6,11 @@
     <!-- /.login-logo -->
     <div class="login-box-body">
       <p class="login-box-msg">Sign in to start your session</p>
+      <div v-if="successMessage" class="alert alert-success">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        {{ successMessage }}
+      </div>
+
       <form v-on:submit.prevent="login()">
         <div v-if="errors.length > 0">
           <div  class="alert alert-danger">
@@ -46,7 +51,7 @@
 </template>
 
 <script>
-
+import { mapGetters } from 'vuex';
 import authService from './../../services/auth';
 
 export default {
@@ -66,5 +71,8 @@ export default {
       authService.login(this, this.creds, '/dashboard');
     },
   },
+  computed: mapGetters([
+    'successMessage',
+  ]),
 };
 </script>

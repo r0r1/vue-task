@@ -269,7 +269,8 @@
     },
     methods: {
       logout() {
-        AuthService.logout(this);
+        AuthService.logout(this, '/login');
+        this.$store.dispatch('addSuccessMessage', 'You are Logout from app.');
       },
     },
   };

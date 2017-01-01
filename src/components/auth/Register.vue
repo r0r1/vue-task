@@ -12,25 +12,21 @@
           <div  class="alert alert-danger">
             <a href="#" class="close" data-dismiss="alert">&times;</a>
             <ul v-for="msg in errors">
-                <li>{{ msg.message }}</li>
+                <li>{{ msg }}</li>
             </ul>
           </div>
         </div>
         <div class="form-group has-feedback">
-          <input type="text" class="form-control" placeholder="Full name" v-model="signup.name">
+          <input type="text" class="form-control" placeholder="Full name" v-model="signup.name" required="required">
           <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
-          <input type="email" class="form-control" placeholder="Email" v-model="signup.email">
+          <input type="email" class="form-control" placeholder="Email" v-model="signup.email" required="required">
           <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
-          <input type="password" class="form-control" placeholder="Password" v-model="signup.password">
+          <input type="password" class="form-control" placeholder="Password" v-model="signup.password" required="required">
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-        </div>
-        <div class="form-group has-feedback">
-          <input type="password" class="form-control" placeholder="Retype password" v-model="signup.password_confirmation">
-          <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
         </div>
         <div class="row">
           <!-- /.col -->
@@ -66,7 +62,6 @@ export default {
         name: null,
         email: null,
         password: null,
-        password_confirmation: null,
       },
     };
   },
