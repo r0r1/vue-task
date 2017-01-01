@@ -269,7 +269,7 @@
     },
     methods: {
       logout() {
-        AuthService.logout();
+        AuthService.logout(this);
       },
     },
   };

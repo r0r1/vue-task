@@ -57,6 +57,6 @@ export default [
   {
     path: '/settings',
     component: Setting,
-    meta: { auth: true },
+    // meta: { auth: true },
   },
 ];

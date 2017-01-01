@@ -24,11 +24,8 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.auth)) {
-    console.log('check meta');
     // this route requires auth, check if logged in
     // if not, redirect to login page
-    AuthService.checkAuth();
-    console.log(AuthService.user.authenticated);
     if (!AuthService.user.authenticated) {
       next({
         path: '/login',

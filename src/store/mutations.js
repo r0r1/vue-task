@@ -1,10 +1,8 @@
 /* eslint no-param-reassign: ["error", { "props": false }]*/
-export const increment = (state) => {
-  state.count += 1;
-  state.history.push('increment');
+export const login = (state) => {
+  state.checkAuth = true;
 };
 
-export const decrement = (state) => {
-  state.count -= 1;
-  state.history.push('decrement');
+export const logout = (state) => {
+  state.checkAuth = false;
 };

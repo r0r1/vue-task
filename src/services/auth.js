@@ -22,6 +22,7 @@ export default {
         if (res.data.token) {
           localStorage.setItem('token', res.data.token);
           this.user.authenticated = true;
+          context.$store.dispatch('login');
           router.replace(redirect);
         }
       }, (err) => {
@@ -43,9 +44,10 @@ export default {
   },
 
   // To log out, we just need to remove the token
-  logout() {
+  logout(context) {
     localStorage.removeItem('token');
     this.user.authenticated = false;
+    context.$store.dispatch('logout');
   },
 
   checkAuth() {

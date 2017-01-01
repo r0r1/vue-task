@@ -17,11 +17,17 @@
 </template>
 
 <script>
-  export default {
-    name: 'Content',
-    data() {
-      return {
-      };
-    },
-  };
+import { mapGetters } from 'vuex';
+
+export default {
+  name: 'Content',
+  data() {
+    return {
+    };
+  },
+  computed: mapGetters([
+    'login',
+    'logout',
+  ]),
+};
 </script>
