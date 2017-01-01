@@ -1,0 +1,93 @@
+import router from './../main';
+import authService from './auth';
+import { TASK_URL } from './main';
+// URL and endpoint constants
+
+
+/* global localStorage: false, console: false, $: false */
+/* eslint no-param-reassign: [2, { "props": false }]*/
+
+export default {
+  store(context, data, redirect) {
+    context.$http.post(TASK_URL, data, authService.getAuthHeader())
+      .then((res) => {
+        if (res.data.id) {
+          context.$store.dispatch('addSuccessMessage', 'Add task has been successful.');
+          router.replace(redirect);
+        }
+      }, (err) => {
+        if (typeof err.data === 'object') {
+          context.errors.push(err.data);
+        } else {
+          const errors = JSON.parse(err.data);
+          context.errors.push(errors);
+        }
+      });
+  },
+
+  all(context) {
+    context.$http.get(TASK_URL, authService.getAuthHeader())
+      .then((res) => {
+        if (typeof res.data === 'object') {
+          context.items = res.data;
+        }
+      }, (err) => {
+        if (typeof err.data === 'object') {
+          context.errors.push(err.data);
+        } else {
+          const errors = JSON.parse(err.data);
+          context.errors.push(errors);
+        }
+      });
+  },
+
+  show(context, id) {
+    context.$http.get(`${TASK_URL}/${id}`, authService.getAuthHeader())
+      .then((res) => {
+        if (typeof res.data === 'object') {
+          context.item = res.data;
+        }
+      }, (err) => {
+        if (typeof err.data === 'object') {
+          context.errors.push(err.data);
+        } else {
+          const errors = JSON.parse(err.data);
+          context.errors.push(errors);
+        }
+      });
+  },
+
+  update(context, id, data, redirect) {
+    context.$http.put(`${TASK_URL}/${id}`, data, authService.getAuthHeader())
+      .then((res) => {
+        if (res.data.id) {
+          context.$store.dispatch('addSuccessMessage', 'Update task has been successful.');
+          router.replace(redirect);
+        }
+      }, (err) => {
+        if (typeof err.data === 'object') {
+          context.errors.push(err.data);
+        } else {
+          const errors = JSON.parse(err.data);
+          context.errors.push(errors);
+        }
+      });
+  },
+
+  destroy(context, id, redirect) {
+    context.$http.delete(`${TASK_URL}/${id}`, authService.getAuthHeader())
+      .then((res) => {
+        if (res.data.id) {
+          context.$store.dispatch('addSuccessMessage', 'Delete task has been successful.');
+          router.replace(redirect);
+        }
+      }, (err) => {
+        if (typeof err.data === 'object') {
+          context.errors.push(err.data);
+        } else {
+          const errors = JSON.parse(err.data);
+          context.errors.push(errors);
+        }
+      });
+  },
+};

@@ -1,9 +1,7 @@
 import router from './../main';
-
+import { SIGNUP_URL, LOGIN_URL } from './main';
 // URL and endpoint constants
-const API_URL = 'http://localhost:8080/';
-const LOGIN_URL = `${API_URL}api/v1/login`;
-const SIGNUP_URL = `${API_URL}api/v1/register`;
+
 
 /* global localStorage: false, console: false, $: false */
 /* eslint no-param-reassign: [2, { "props": false }]*/
@@ -73,7 +71,9 @@ export default {
   getAuthHeader() {
     const token = localStorage.getItem('token');
     return {
-      Authorization: `Bearer ${token}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     };
   },
 };
