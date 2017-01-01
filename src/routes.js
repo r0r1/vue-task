@@ -10,6 +10,7 @@ import UserNew from './components/users/UserNew';
 import Task from './components/tasks/Task';
 import TaskList from './components/tasks/TaskList';
 import TaskNew from './components/tasks/TaskNew';
+import TaskEdit from './components/tasks/TaskEdit';
 
 export default [
   {
@@ -60,6 +61,17 @@ export default [
       {
         path: 'new',
         component: TaskNew,
+        meta: { auth: true },
+      },
+      {
+        path: 'edit/:taskId',
+        name: 'edit_task',
+        component: TaskEdit,
+        meta: { auth: true },
+      },
+      {
+        path: ':taskId',
+        name: 'delete_task',
         meta: { auth: true },
       },
     ],
