@@ -6,3 +6,12 @@ export const login = (state) => {
 export const logout = (state) => {
   state.checkAuth = false;
 };
+
+export const addSuccessMessage = (state, { text }) => {
+  console.log(text);
+  state.success_message = text;
+};
+
+export const addErrorMessages = (state, { error }) => {
+  state.error_messages.push({ message: error });
+};
