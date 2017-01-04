@@ -31,16 +31,16 @@
               </div>
             </div>
 
-            <!--<div class="form-group">
+            <div class="form-group">
               <label for="parent" class="col-sm-2 control-label">User</label>
               <div class="col-sm-10">
-                <select class="form-control" v-model="task.user" id="user">
-                  <option v-for="u in allUser" v-bind:value="u.Id">
-                    {{ u.Name }}
+                <select class="form-control" v-model="task.user_id" id="user">
+                  <option v-for="u in allUser" v-bind:value="u.ID">
+                    {{ u.name }}
                   </option>
                 </select>
               </div>
-            </div>-->
+            </div>
 
             <div class="form-group">
               <label for="priority_id" class="col-sm-2 control-label">Priority</label>
@@ -75,7 +75,7 @@
           <!-- /.box-body -->
           <div class="box-footer">
             <router-link to="/tasks/list" class="btn btn-default">Cancel</router-link>
-            <button type="submit" class="btn btn-primary pull-right">Sign in</button>
+            <button type="submit" class="btn btn-primary pull-right">Submit</button>
           </div>
           <!-- /.box-footer -->
         </form>
@@ -86,7 +86,7 @@
 
 <script>
 import taskService from './../../services/task';
-// import userService from './../../services/user';
+import userService from './../../services/user';
 
 export default {
   name: 'TaskNew',
@@ -98,6 +98,7 @@ export default {
         parent: null,
         status: null,
         priority: null,
+        user_id: null,
       },
       priorities: [
         { text: '1', value: 1 },
@@ -122,11 +123,10 @@ export default {
       taskService.store(this, this.task, '/tasks/list');
     },
     getUsers() {
-      // this.allUser = userService.all(this);
+      userService.all(this);
     },
     getParents() {
-      taskService.all(this);
-      console.log(this.items);
+      taskService.all(this, true);
     },
   },
 };

@@ -26,6 +26,7 @@
             <tbody>
               <tr>
                 <th>ID</th>
+                <th>Name</th>
                 <th>User</th>
                 <th>Status</th>
                 <th>Priority</th>
@@ -35,6 +36,7 @@
               </tr>
               <tr v-for="task in items">
                 <td>{{ task.ID }}</td>
+                <td>{{ task.name }}</td>
                 <td>{{ task.User }}</td>
                 <td>
                   <span v-if="task.status === 'progress'" class="label label-info">

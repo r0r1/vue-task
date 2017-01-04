@@ -55,7 +55,6 @@ export default {
       .then((res) => {
         localStorage.setItem('user_id', res.data.ID);
         context.$store.dispatch('currentUser', res.data);
-        console.log('user', res.data);
       }, (err) => {
         const errors = JSON.parse(err.data);
         context.$store.dispatch('addErrorMessages', errors);

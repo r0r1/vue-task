@@ -9,7 +9,7 @@ export default {
     context.$http.get(USER_URL, authService.getAuthHeader())
       .then((res) => {
         if (typeof res.data === 'object') {
-          context.items = res.data;
+          context.allUser = res.data;
         }
       }, (err) => {
         if (typeof err.data === 'object') {

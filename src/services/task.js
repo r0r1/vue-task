@@ -25,11 +25,15 @@ export default {
       });
   },
 
-  all(context) {
+  all(context, parent = false) {
+    context.items = [];
     context.$http.get(TASK_URL, authService.getAuthHeader())
       .then((res) => {
         if (typeof res.data === 'object') {
           context.items = res.data;
+          if (parent) {
+            context.items.push({ ID: 0, name: 'Parent' });
+          }
         }
       }, (err) => {
         if (typeof err.data === 'object') {
