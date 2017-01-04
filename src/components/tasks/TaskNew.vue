@@ -34,8 +34,8 @@
             <div class="form-group">
               <label for="parent" class="col-sm-2 control-label">User</label>
               <div class="col-sm-10">
-                <select class="form-control" v-model="task.user_id" id="user">
-                  <option v-for="u in allUser" v-bind:value="u.ID">
+                <select class="form-control" v-model="task.user" id="user">
+                  <option v-for="u in allUser" v-bind:value="u">
                     {{ u.name }}
                   </option>
                 </select>
@@ -98,7 +98,7 @@ export default {
         parent: null,
         status: null,
         priority: null,
-        user_id: null,
+        user: null,
       },
       priorities: [
         { text: '1', value: 1 },

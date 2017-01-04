@@ -37,7 +37,7 @@
               <tr v-for="task in items">
                 <td>{{ task.ID }}</td>
                 <td>{{ task.name }}</td>
-                <td>{{ task.User }}</td>
+                <td>{{ task.User.name }}</td>
                 <td>
                   <span v-if="task.status === 'progress'" class="label label-info">
                     {{ task.status }}
