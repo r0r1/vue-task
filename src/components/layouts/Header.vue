@@ -213,33 +213,18 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="~assets/images/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+              <img src="~assets/images/avatar.png" class="user-image" alt="User Image">
+              <span class="hidden-xs">{{ currentUser.name }}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="~assets/images/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="~assets/images/avatar.png" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  {{ currentUser.name }} - {{ currentUser.email }}
+                  <small>{{ currentUser.contact }}</small>
                 </p>
-              </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
@@ -259,19 +244,28 @@
 </template>
 
 <script>
-  import AuthService from './../../services/auth';
+import AuthService from './../../services/auth';
 
-  export default {
-    name: 'Header',
-    data() {
-      return {
-      };
+export default {
+  name: 'Header',
+  data() {
+    return {
+      currentUser: this.currentUser(),
+    };
+  },
+  methods: {
+    logout() {
+      AuthService.logout(this, '/login');
+      this.$store.dispatch('addSuccessMessage', 'You are Logout from app.');
     },
-    methods: {
-      logout() {
-        AuthService.logout(this, '/login');
-        this.$store.dispatch('addSuccessMessage', 'You are Logout from app.');
-      },
+    currentUser() {
+      AuthService.currentUser(this);
     },
-  };
+  },
+  computed: {
+    currentUser() {
+      return this.$store.state.currentUser;
+    },
+  },
+};
 </script>

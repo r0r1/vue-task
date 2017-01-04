@@ -6,10 +6,10 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="~assets/images/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="~assets/images/avatar.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>{{ currentUser.name }}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -50,14 +50,17 @@
 </template>
 
 <script>
-  export default {
-    name: 'Sidebar',
-    data() {
-      return {
-        menus: this.$parent.$data.menus || [],
-      };
-    },
-    ready() {
-    },
-  };
+import { mapGetters } from 'vuex';
+
+export default {
+  name: 'Sidebar',
+  data() {
+    return {
+      menus: this.$parent.$data.menus || [],
+    };
+  },
+  computed: mapGetters([
+    'currentUser',
+  ]),
+};
 </script>
