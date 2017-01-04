@@ -7,8 +7,11 @@ export const logout = (state) => {
   state.checkAuth = false;
 };
 
+export const currentUser = (state, { user }) => {
+  state.currentUser = user;
+};
+
 export const addSuccessMessage = (state, { text }) => {
-  console.log(text);
   state.success_message = text;
 };
 

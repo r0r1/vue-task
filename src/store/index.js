@@ -11,6 +11,7 @@ authService.checkAuth();
 
 const state = {
   checkAuth: authService.user.authenticated,
+  currentUser: {},
   success_message: null,
   error_messages: [],
 };
