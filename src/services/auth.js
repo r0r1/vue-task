@@ -1,5 +1,5 @@
 import router from './../main';
-import { SIGNUP_URL, LOGIN_URL } from './main';
+import { SIGNUP_URL, LOGIN_URL, CURRENT_USER_URL } from './main';
 // URL and endpoint constants
 
 
@@ -43,6 +43,19 @@ export default {
           router.replace(redirect);
           context.$store.dispatch('addSuccessMessage', 'Register has been successful, please login.');
         }
+      }, (err) => {
+        const errors = JSON.parse(err.data);
+        context.$store.dispatch('addErrorMessages', errors);
+        context.errors.push(errors);
+      });
+  },
+
+  currentUser(context) {
+    context.$http.get(CURRENT_USER_URL, this.getAuthHeader())
+      .then((res) => {
+        localStorage.setItem('user_id', res.data.ID);
+        context.$store.dispatch('currentUser', res.data);
+        console.log('user', res.data);
       }, (err) => {
         const errors = JSON.parse(err.data);
         context.$store.dispatch('addErrorMessages', errors);
