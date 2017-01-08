@@ -46,6 +46,7 @@ export default {
       if (filterKey) {
         data = data.filter(row => this.getFilterKey(row, filterKey));
       }
+      console.log('sortkey : ', sortKey);
       if (sortKey) {
         data = data.slice().sort((a, b) => {
           const row1 = a[sortKey];
@@ -63,11 +64,11 @@ export default {
     capitalize: str => str.charAt(0).toUpperCase() + str.slice(1),
   },
   methods: {
-    sortBy: (key) => {
+    sortBy(key) {
       this.sortKey = key;
       this.sortOrders[key] = this.sortOrders[key] * -1;
     },
-    getFilterKey: (row, filterKey) => {
+    getFilterKey(row, filterKey) {
       const keys = Object.keys(row).some((key) => {
         const rowKey = String(row[key]);
         return rowKey.toLowerCase().indexOf(filterKey) > -1;
@@ -79,12 +80,12 @@ export default {
 </script>
 
 <style>
-th.active {
-  color: #fff;
+th, td {
+  min-width: 80px;
 }
 
-th.active .arrow {
-  opacity: 1;
+th.active {
+  color: #000;
 }
 
 .arrow {
