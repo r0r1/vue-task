@@ -30,7 +30,7 @@ export default {
     context.$http.get(TASK_URL, authService.getAuthHeader())
       .then((res) => {
         if (typeof res.data === 'object') {
-          context.items = res.data;
+          context.items = res.data.items;
           if (parent) {
             context.items.push({ ID: 0, name: 'Parent' });
           }
