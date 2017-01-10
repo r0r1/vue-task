@@ -20,7 +20,9 @@
           <table-lte
             :data="items"
             :columns="gridColumns"
-            :filter-key="searchQuery">
+            :filter-key="searchQuery"
+            :actions="itemActions"
+          >
           </table-lte>
         </div>
         <!-- /.box-body -->
@@ -40,6 +42,11 @@ export default {
       errors: [],
       searchQuery: '',
       gridColumns: ['id', 'user', 'name', 'priority', 'status', 'date'],
+      itemActions: [
+        { name: 'view-item', label: '', icon: 'fa fa-eye', modal: true },
+        { name: 'edit-item', label: '', icon: 'fa fa-edit', modal: false },
+        { name: 'delete-item', label: '', icon: 'fa fa-trash-o', modal: true },
+      ],
       items: this.getData() || [],
     };
   },
