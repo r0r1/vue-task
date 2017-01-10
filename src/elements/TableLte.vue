@@ -12,7 +12,21 @@
       </tr>
       <tr v-for="entry in filteredData">
         <td v-for="key in columns">
-          {{ entry[key] }}
+          <template v-if="key == 'action'">
+            <template v-for="action in actions">
+              <a v-if="!action.modal" href="#">
+                <i :class="action.icon"></i> 
+                <small> {{ action.label }} </small>
+              </a>
+              <a v-else href="#">
+                <i :class="action.icon"></i> 
+                <small> {{ action.label }} </small>
+              </a>
+            </template>
+          </template>
+          <template v-else>
+            {{ entry[key] }}
+          </template>
         </td>
       </tr>
     </tbody>
@@ -25,10 +39,20 @@ export default {
   props: {
     data: Array,
     columns: Array,
+    actions: Array,
     filterKey: String,
   },
   data() {
     const sorts = {};
+    if (this.actions) {
+      this.columns.push('action');
+      // this.data.map((row) => {
+      //   this.actions.forEach((action) => {
+      //     row.items = action;
+      //   });
+      //   return row;
+      // });
+    }
     this.columns.forEach((key) => {
       sorts[key] = 1;
     });
@@ -74,6 +98,9 @@ export default {
       });
       return keys;
     },
+  },
+  ready() {
+    console.log('aaa');
   },
 };
 </script>
