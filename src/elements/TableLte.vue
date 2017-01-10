@@ -46,7 +46,6 @@ export default {
       if (filterKey) {
         data = data.filter(row => this.getFilterKey(row, filterKey));
       }
-      console.log('sortkey : ', sortKey);
       if (sortKey) {
         data = data.slice().sort((a, b) => {
           const row1 = a[sortKey];

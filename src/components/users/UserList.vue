@@ -11,7 +11,6 @@
           </div><!-- /.box-tools -->
         </div><!-- /.box-header -->
         <div class="box-body">
-          <vuetable api-url="/../../services/users.json" :fields="columns"></vuetable>
         </div><!-- /.box-body -->
       </div><!-- /.box -->        
     </div>

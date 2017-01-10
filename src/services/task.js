@@ -32,6 +32,9 @@ export default {
         if (typeof res.data === 'object') {
           context.items = res.data.items;
           if (parent) {
+            if (context.items === null) {
+              context.items = [];
+            }
             context.items.push({ ID: 0, name: 'Parent' });
           }
         }
