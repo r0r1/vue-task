@@ -26,6 +26,12 @@
           </table-lte>
         </div>
         <!-- /.box-body -->
+        
+        <modal-lte 
+          confirm=false
+          title="Delete Task"
+          body="Are you sure want delete this task ?">
+        </modal-lte>
       </div>   
     </div>
   </div>
@@ -34,6 +40,7 @@
 <script>
 import taskService from './../../services/task';
 import TableLte from './../../elements/TableLte';
+import ModalLte from './../../elements/ModalLte';
 
 export default {
   name: 'TaskList',
@@ -43,14 +50,13 @@ export default {
       searchQuery: '',
       gridColumns: ['id', 'user', 'name', 'priority', 'status', 'date'],
       itemActions: [
-        { name: 'view-item', label: '', icon: 'fa fa-eye', modal: true },
         { name: 'edit-item', label: '', icon: 'fa fa-edit', modal: false },
         { name: 'delete-item', label: '', icon: 'fa fa-trash-o', modal: true },
       ],
       items: this.getData() || [],
     };
   },
-  components: { 'table-lte': TableLte },
+  components: { TableLte, ModalLte },
   methods: {
     getData() {
       taskService.all(this);

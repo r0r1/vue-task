@@ -18,7 +18,7 @@
                 <i :class="action.icon"></i> 
                 <small> {{ action.label }} </small>
               </a>
-              <a v-else href="#">
+              <a v-else href="#" data-toggle="modal" data-target="#table-modal">
                 <i :class="action.icon"></i> 
                 <small> {{ action.label }} </small>
               </a>
@@ -46,12 +46,6 @@ export default {
     const sorts = {};
     if (this.actions) {
       this.columns.push('action');
-      // this.data.map((row) => {
-      //   this.actions.forEach((action) => {
-      //     row.items = action;
-      //   });
-      //   return row;
-      // });
     }
     this.columns.forEach((key) => {
       sorts[key] = 1;
@@ -98,9 +92,6 @@ export default {
       });
       return keys;
     },
-  },
-  ready() {
-    console.log('aaa');
   },
 };
 </script>
