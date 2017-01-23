@@ -5,18 +5,18 @@ export default [
     icon: 'fa fa-home',
   },
   {
-    name: 'Users',
-    link: '/users',
-    icon: 'fa fa-user',
+    name: 'Tags',
+    link: '/tags',
+    icon: 'fa fa-tag',
     child: [
     {
       name: 'New',
-      link: '/users/new',
+      link: '/tags/new',
       icon: 'fa fa-circle-o',
     },
     {
       name: 'Lists',
-      link: '/users/list',
+      link: '/tags/list',
       icon: 'fa fa-circle-o'
     }
     ]
