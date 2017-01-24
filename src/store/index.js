@@ -14,6 +14,7 @@ const state = {
   currentUser: {},
   success_message: null,
   error_messages: [],
+  modal: {},
 };
 
 const store = new Vuex.Store({

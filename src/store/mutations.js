@@ -18,3 +18,8 @@ export const addSuccessMessage = (state, { text }) => {
 export const addErrorMessages = (state, { error }) => {
   state.error_messages.push({ message: error });
 };
+
+export const addModalData = (state, { id, name }) => {
+  state.modal.id = id;
+  state.modal.name = name;
+};
