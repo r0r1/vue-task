@@ -18,6 +18,7 @@
         <!-- /.box-header -->
         <div class="box-body table-responsive no-padding">
           <table-lte
+            :name="task-list"
             :data="items"
             :columns="gridColumns"
             :filter-key="searchQuery"
@@ -28,7 +29,6 @@
         <!-- /.box-body -->
         
         <modal-lte 
-          confirm=false
           title="Delete Task"
           body="Are you sure want delete this task ?">
         </modal-lte>
@@ -50,6 +50,8 @@ export default {
       searchQuery: '',
       gridColumns: ['id', 'user', 'name', 'priority', 'status', 'date'],
       itemActions: [
+        { name: 'add-notes', label: '', icon: 'fa fa-plus', modal: true },
+        { name: 'detail-item', label: '', icon: 'fa fa-eye-open', modal: false },
         { name: 'edit-item', label: '', icon: 'fa fa-edit', modal: false },
         { name: 'delete-item', label: '', icon: 'fa fa-trash-o', modal: true },
       ],
