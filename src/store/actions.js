@@ -5,8 +5,4 @@ export const addSuccessMessage = ({ commit }, message) => commit('addSuccessMess
 export const addErrorMessages = ({ commit }, messages) => commit('addErrorMessages', {
   message: messages,
 });
-export const addModalData = ({ commit }, data) => commit('addModalData', {
-  id: data.id,
-  name: data.name,
-});
-
+export const addModalData = ({ commit }, data) => commit('addModalData', { modalData: data });

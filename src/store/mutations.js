@@ -19,7 +19,6 @@ export const addErrorMessages = (state, { error }) => {
   state.error_messages.push({ message: error });
 };
 
-export const addModalData = (state, { id, name }) => {
-  state.modal.id = id;
-  state.modal.name = name;
+export const addModalData = (state, { modalData }) => {
+  state.modal = modalData;
 };
