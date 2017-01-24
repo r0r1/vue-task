@@ -18,8 +18,8 @@
                 <i :class="action.icon"></i> 
                 <small> {{ action.label }} </small>
               </a>
-              <a v-else href="#" data-toggle="modal" data-target="#table-modal">
-                <i :class="action.icon"></i> 
+              <a v-else href="#" data-toggle="modal" data-target="#modal-lte" @click="openModal('task-list', entry.id)">
+                <i :class="action.icon"></i>
                 <small> {{ action.label }} </small>
               </a>
             </template>
@@ -37,6 +37,7 @@
 export default {
   name: 'TableLTE',
   props: {
+    name: String,
     data: Array,
     columns: Array,
     actions: Array,
@@ -53,6 +54,7 @@ export default {
     return {
       sortKey: '',
       sortOrders: sorts || {},
+      modalId: 0,
     };
   },
   computed: {
@@ -91,6 +93,10 @@ export default {
         return rowKey.toLowerCase().indexOf(filterKey) > -1;
       });
       return keys;
+    },
+    openModal(name, id) {
+      const data = { id, name };
+      this.$store.dispatch('addModalData', data);
     },
   },
 };
