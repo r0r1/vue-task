@@ -18,7 +18,7 @@
                 <i :class="action.icon"></i> 
                 <small> {{ action.label }} </small>
               </a>
-              <a v-else href="#" data-toggle="modal" data-target="#modal-lte" @click="openModal('task-list', entry.id)">
+              <a v-else href="#" data-toggle="modal" :data-target="modalId" @click="openModal(action.name, entry.id)">
                 <i :class="action.icon"></i>
                 <small> {{ action.label }} </small>
               </a>
@@ -54,7 +54,7 @@ export default {
     return {
       sortKey: '',
       sortOrders: sorts || {},
-      modalId: 0,
+      modalId: '#modal-lte',
     };
   },
   computed: {
@@ -96,6 +96,7 @@ export default {
     },
     openModal(name, id) {
       const data = { id, name };
+      this.modalId = `#${name}`;
       this.$store.dispatch('addModalData', data);
     },
   },
