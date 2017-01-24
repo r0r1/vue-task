@@ -18,7 +18,6 @@
         <!-- /.box-header -->
         <div class="box-body table-responsive no-padding">
           <table-lte
-            :name="task-list"
             :data="items"
             :columns="gridColumns"
             :filter-key="searchQuery"
@@ -29,8 +28,19 @@
         <!-- /.box-body -->
         
         <modal-lte 
+          name="delete-item"
+          type="confirm"
           title="Delete Task"
-          body="Are you sure want delete this task ?">
+          body="Are you sure want delete this task ?"
+        >
+        </modal-lte>
+
+        <modal-lte 
+          name="add-notes"
+          type="form"
+          title="Add Notes"
+          body="Add notes here please"
+        >
         </modal-lte>
       </div>   
     </div>
