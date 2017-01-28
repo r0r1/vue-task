@@ -14,10 +14,10 @@
         <td v-for="key in columns">
           <template v-if="key == 'action'">
             <template v-for="action in actions">
-              <a v-if="!action.modal" href="#">
-                <i :class="action.icon"></i> 
+              <router-link v-if="!action.modal" :to="{name: action.link.name, params: { 'id': entry.id }}">
+                <i :class="action.icon"></i>
                 <small> {{ action.label }} </small>
-              </a>
+              </router-link>
               <a v-else href="#" data-toggle="modal" :data-target="modalId" @click="openModal(action.name, entry.id)">
                 <i :class="action.icon"></i>
                 <small> {{ action.label }} </small>
