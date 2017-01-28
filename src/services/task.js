@@ -84,9 +84,9 @@ export default {
   destroy(context, id, redirect) {
     context.$http.delete(`${TASK_URL}/${id}`, authService.getAuthHeader())
       .then((res) => {
-        if (res.data.id) {
+        if (res.data.message) {
           context.$store.dispatch('addSuccessMessage', 'Delete task has been successful.');
-          router.replace(redirect);
+          router.go(redirect);
         }
       }, (err) => {
         if (typeof err.data === 'object') {

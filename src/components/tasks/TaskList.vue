@@ -32,6 +32,7 @@
           type="confirm"
           title="Delete Task"
           body="Are you sure want delete this task ?"
+          :action="deleteTask.bind()"
         >
         </modal-lte>
 
@@ -40,6 +41,7 @@
           type="form"
           title="Add Notes"
           body="Add notes here please"
+          :action="addNotes.bind()"
         >
         </modal-lte>
       </div>   
@@ -72,6 +74,13 @@ export default {
   methods: {
     getData() {
       taskService.all(this);
+    },
+    deleteTask() {
+      const id = this.$store.state.modal.id;
+      taskService.destroy(this, id, '/tasks/list');
+    },
+    addNotes() {
+
     },
   },
 };
