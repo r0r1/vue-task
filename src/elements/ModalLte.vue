@@ -1,5 +1,5 @@
 <template>
-  <div class="modal fade" :id="name" role="dialog" aria-labelledby="tableModalLabel" aria-hidden="true">
+  <div :class="modal" :id="name" role="dialog" aria-labelledby="tableModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md">
       <form class="form-horizontal" @submit.prevent="action()" novalidate>
         <div class="modal-content">
@@ -53,12 +53,26 @@ export default {
   },
   data() {
     return {
+      show: true,
+      modal: 'modal fade in',
     };
   },
   methods: {
+    closeModal() {
+      this.show = false;
+    },
   },
-  computed: mapGetters([
-    'modalData',
-  ]),
+  computed: {
+    show() {
+      if (this.show) {
+        this.modal = 'modal fade in';
+      } else {
+        this.modal = 'modal fade out';
+      }
+    },
+    ...mapGetters([
+      'modalData',
+    ]),
+  },
 };
 </script>
