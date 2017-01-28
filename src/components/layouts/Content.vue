@@ -7,6 +7,10 @@
       </section>
       <!-- Main content -->
       <section class="content">
+        <div v-if="successMessage" class="alert alert-success">
+          <a href="#" class="close" data-dismiss="alert">&times;</a>
+          {{ successMessage }}
+        </div>
         <transition>
           <router-view></router-view>
         </transition>
@@ -28,6 +32,7 @@ export default {
   computed: mapGetters([
     'login',
     'logout',
+    'successMessage',
   ]),
 };
 </script>
