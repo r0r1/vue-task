@@ -57,6 +57,7 @@
 
 <script>
 import taskService from './../../services/task';
+import noteService from './../../services/note';
 import TableLte from './../../elements/TableLte';
 import ModalLte from './../../elements/ModalLte';
 
@@ -89,8 +90,10 @@ export default {
       taskService.destroy(this, id, '/tasks/list');
     },
     addNotes() {
-      console.log('add Notes');
-      console.log(this.notes.name);
+      this.notes.task_id = this.$store.state.modal.id;
+      this.notes.user_id = this.$store.state.currentUser.ID;
+      noteService.store(this, this.notes, `/tasks/${this.notes.task_id}`);
+      this.notes = {};
     },
   },
 };
