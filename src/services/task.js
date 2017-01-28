@@ -64,6 +64,21 @@ export default {
       });
   },
 
+  showNotes(context, id) {
+    context.items = [];
+    context.$http.get(`${TASK_URL}/${id}/notes`, authService.getAuthHeader())
+      .then((res) => {
+        context.notes = res.data.items;
+      }, (err) => {
+        if (typeof err.data === 'object') {
+          context.errors.push(err.data);
+        } else {
+          const errors = JSON.parse(err.data);
+          context.errors.push(errors);
+        }
+      });
+  },
+
   update(context, id, data, redirect) {
     context.$http.put(`${TASK_URL}/${id}`, data, authService.getAuthHeader())
       .then((res) => {
