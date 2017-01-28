@@ -43,6 +43,12 @@
           body="Add notes here please"
           :action="addNotes.bind()"
         >
+          <div class="form-group">
+            <label for="name" class="col-sm-2 control-label">Name</label>
+            <div class="col-sm-10">
+              <input type="text" v-model="notes.name" class="form-control" id="name" placeholder="Name">
+            </div>
+          </div>
         </modal-lte>
       </div>   
     </div>
@@ -68,6 +74,9 @@ export default {
         { name: 'delete-item', label: '', icon: 'fa fa-trash-o', modal: true },
       ],
       items: this.getData() || [],
+      notes: {
+        name: null,
+      },
     };
   },
   components: { TableLte, ModalLte },
@@ -80,7 +89,8 @@ export default {
       taskService.destroy(this, id, '/tasks/list');
     },
     addNotes() {
-
+      console.log('add Notes');
+      console.log(this.notes.name);
     },
   },
 };
