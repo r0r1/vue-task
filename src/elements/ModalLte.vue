@@ -11,7 +11,7 @@
           </div>
           <div class="modal-body">
             <slot>
-              <p>{{ body }}</p>
+              <p>{{ content }}</p>
             </slot>
           </div>
           <div class="modal-footer">
@@ -42,7 +42,7 @@ export default {
       type: String,
       required: true,
     },
-    body: {
+    content: {
       type: String,
       required: true,
     },
@@ -52,23 +52,10 @@ export default {
   },
   data() {
     return {
-      show: true,
       modal: 'modal fade in',
     };
   },
-  methods: {
-    closeModal() {
-      this.show = false;
-    },
-  },
   computed: {
-    show() {
-      if (this.show) {
-        this.modal = 'modal fade in';
-      } else {
-        this.modal = 'modal fade out';
-      }
-    },
     ...mapGetters([
       'modalData',
     ]),
