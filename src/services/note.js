@@ -86,7 +86,7 @@ export default {
       .then((res) => {
         if (res.data.message) {
           context.$store.dispatch('addSuccessMessage', 'Delete note has been successful.');
-          router.go(redirect);
+          router.replace(redirect);
         }
       }, (err) => {
         if (typeof err.data === 'object') {
