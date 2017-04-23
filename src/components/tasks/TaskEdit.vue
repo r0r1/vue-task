@@ -89,7 +89,7 @@ import taskService from './../../services/task';
 import userService from './../../services/user';
 
 export default {
-  name: 'Taskedit',
+  name: 'TaskEdit',
   data() {
     return {
       task: {
