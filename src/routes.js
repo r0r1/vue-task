@@ -72,13 +72,13 @@ export default [
       },
       {
         path: ':id',
-        name: 'delete_task',
+        name: 'detail_task',
+        component: TaskDetail,
         meta: { auth: true },
       },
       {
-        path: ':id',
-        name: 'detail_task',
-        component: TaskDetail,
+        path: 'delete/:id',
+        name: 'delete_task',
         meta: { auth: true },
       },
     ],
