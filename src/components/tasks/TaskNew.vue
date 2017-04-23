@@ -68,12 +68,12 @@
               <label for="tags" class="col-sm-2 control-label">Tags</label>
               <div class="col-sm-10">
                 <multiselect 
-                  v-model="tags" 
+                  v-model="tagSelected" 
                   tag-placeholder="Add this as new tag" 
                   placeholder="Search or add a tag" 
                   label="name" 
-                  track-by="code" 
-                  :options="options" 
+                  track-by="id" 
+                  :options="tags" 
                   :multiple="true" 
                   :taggable="true" 
                   @tag="addTag">
@@ -106,6 +106,7 @@
 import Multiselect from 'vue-multiselect';
 import taskService from './../../services/task';
 import userService from './../../services/user';
+import tagService from './../../services/tag';
 
 export default {
   name: 'TaskNew',
@@ -135,14 +136,14 @@ export default {
       allUser: this.getUsers() || [],
       items: this.getParents() || [],
       errors: [],
-      tags: [],
-      options: [],
+      tagSelected: [],
+      tags: this.getTag() || [],
     };
   },
   methods: {
     addTask() {
       this.errors = [];
-      this.task.tags = this.tags;
+      this.task.tags = this.tagSelected;
       taskService.store(this, this.task, '/tasks/list');
     },
     getUsers() {
@@ -151,13 +152,16 @@ export default {
     getParents() {
       taskService.all(this, true);
     },
+    getTag() {
+      tagService.all(this);
+    },
     addTag(newTag) {
       const tag = {
         name: newTag,
         code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000)),
       };
-      this.options.push(tag);
       this.tags.push(tag);
+      this.tagSelected.push(tag);
     },
   },
   components: {
