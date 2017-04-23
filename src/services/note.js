@@ -52,7 +52,7 @@ export default {
     context.$http.get(`${NOTE_URL}/${id}`, authService.getAuthHeader())
       .then((res) => {
         if (typeof res.data === 'object') {
-          context.item = res.data;
+          context.note = res.data;
         }
       }, (err) => {
         if (typeof err.data === 'object') {
