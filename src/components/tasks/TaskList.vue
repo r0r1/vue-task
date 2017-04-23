@@ -31,7 +31,7 @@
           name="delete-item"
           type="confirm"
           title="Delete Task"
-          body="Are you sure want delete this task ?"
+          content="Are you sure want delete this task ?"
           :action="deleteTask.bind()"
         >
         </modal-lte>
@@ -40,7 +40,7 @@
           name="add-notes"
           type="form"
           title="Add Notes"
-          body="Add notes here please"
+          content="Add notes here please"
           :action="addNotes.bind()"
         >
           <div class="form-group">
@@ -93,6 +93,7 @@ export default {
       this.notes.task_id = this.$store.state.modal.id;
       this.notes.user_id = this.$store.state.currentUser.ID;
       noteService.store(this, this.notes, `/tasks/${this.notes.task_id}`);
+      this.$store.commit('closeModal');
       this.notes = {};
     },
   },

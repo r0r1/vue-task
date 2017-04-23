@@ -62,7 +62,7 @@
             name="delete-item"
             type="confirm"
             title="Delete Note"
-            body="Are you sure want delete this note ?"
+            content="Are you sure want delete this note ?"
             :action="deleteNote.bind()"
           >
           </modal-lte>
@@ -101,12 +101,9 @@ export default {
     },
     deleteNote() {
       const id = this.$store.state.modal.id;
-      noteService.destroy(this, id, `/tasks/${id}`);
+      noteService.destroy(this, id, `/tasks/${this.$route.params.id}`);
+      this.$store.commit('closeModal');
     },
-  },
-  created() {
-    console.log('asd');
-    this.getTask();
   },
   components: { TableLte, ModalLte },
 };
