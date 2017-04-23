@@ -71,7 +71,7 @@ export default {
       itemActions: [
         { name: 'add-notes', label: '', icon: 'fa fa-plus', modal: true },
         { name: 'detail-item', label: '', icon: 'fa fa-eye', modal: false, link: { name: 'detail_task' } },
-        { name: 'edit-item', label: '', icon: 'fa fa-edit', modal: false, link: { name: 'detail_task' } },
+        { name: 'edit-item', label: '', icon: 'fa fa-edit', modal: false, link: { name: 'edit_task' } },
         { name: 'delete-item', label: '', icon: 'fa fa-trash-o', modal: true },
       ],
       items: this.getData() || [],

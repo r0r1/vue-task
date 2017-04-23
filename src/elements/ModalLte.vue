@@ -12,7 +12,6 @@
           <div class="modal-body">
             <slot>
               <p>{{ body }}</p>
-              
             </slot>
           </div>
           <div class="modal-footer">

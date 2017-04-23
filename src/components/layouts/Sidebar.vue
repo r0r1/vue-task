@@ -33,7 +33,7 @@
             <span>{{ row.name }}</span> 
           </router-link>
           
-          <ul v-show="row.hasOwnProperty('child') && typeof row.child.length != 'undefined'" class="treeview-menu">
+          <ul v-show="row.hasOwnProperty('child') && typeof row.child.length !== undefined" class="treeview-menu">
             <li v-for="child in row.child">
               <router-link :to="child.link">
                 <i :class="child.icon"></i> 

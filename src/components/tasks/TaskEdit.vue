@@ -124,10 +124,15 @@ export default {
     getUsers() {
       // this.allUser = userService.all(this);
     },
+    getTask() {
+      taskService.show(this, this.$route.params.id);
+    },
     getParents() {
       taskService.all(this);
-      console.log(this.items);
     },
+  },
+  created() {
+    this.task = this.getTask();
   },
 };
 </script>
