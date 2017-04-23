@@ -77,7 +77,6 @@
           >
             <div class="form-group">
               <label for="name" class="col-sm-2 control-label">Name</label>
-              {{ note }}
               <div class="col-sm-10" v-if="typeof note == 'object'">
                 <input type="text" v-model="note.name" class="form-control" id="name" placeholder="Name">
               </div>
@@ -118,6 +117,7 @@ export default {
     },
     deleteNote() {
       const id = this.$store.state.modal.id;
+      delete this.$store.state.modal.id;
       noteService.destroy(this, id, `/tasks/${this.$route.params.id}`);
       this.$store.commit('closeModal');
     },
