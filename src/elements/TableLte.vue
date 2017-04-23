@@ -18,7 +18,7 @@
                 <i :class="action.icon"></i>
                 <small> {{ action.label }} </small>
               </router-link>
-              <a v-else href="#" data-toggle="modal" :data-target="modalId" @click="openModal(action.name, entry.id)">
+              <a v-else href="#" data-toggle="modal" :data-target="modalId" @click="openModal(action.name, entry.id, entry)">
                 <i :class="action.icon"></i>
                 <small> {{ action.label }} </small>
               </a>
@@ -94,8 +94,8 @@ export default {
       });
       return keys;
     },
-    openModal(name, id) {
-      const data = { id, name };
+    openModal(name, id, item) {
+      const data = { id, name, item };
       this.modalId = `#${name}`;
       this.$store.dispatch('addModalData', data);
     },

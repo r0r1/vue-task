@@ -59,12 +59,29 @@
           </table-lte>
 
           <modal-lte 
-            name="delete-item"
+            name="delete-note-item"
             type="confirm"
             title="Delete Note"
             content="Are you sure want delete this note ?"
+            data="note"
             :action="deleteNote.bind()"
           >
+          </modal-lte>
+          
+          <modal-lte 
+            name="update-note-item"
+            type="form"
+            title="Edit Note"
+            content="edit note"
+            :action="updateNote.bind()"
+          >
+            <div class="form-group">
+              <label for="name" class="col-sm-2 control-label">Name</label>
+              {{ note }}
+              <div class="col-sm-10" v-if="typeof note == 'object'">
+                <input type="text" v-model="note.name" class="form-control" id="name" placeholder="Name">
+              </div>
+            </div>
           </modal-lte>
         </div>
       </div>
@@ -85,10 +102,10 @@ export default {
       task: this.getTask() || {},
       notes: this.getNotes() || [],
       searchQuery: '',
-      gridColumns: ['id', 'name', 'user'],
+      gridColumns: ['id', 'name'],
       itemActions: [
-        { name: 'update-item', label: '', icon: 'fa fa-edit', modal: true },
-        { name: 'delete-item', label: '', icon: 'fa fa-trash-o', modal: true },
+        { name: 'update-note-item', label: '', icon: 'fa fa-edit', modal: true },
+        { name: 'delete-note-item', label: '', icon: 'fa fa-trash-o', modal: true },
       ],
     };
   },
@@ -103,6 +120,19 @@ export default {
       const id = this.$store.state.modal.id;
       noteService.destroy(this, id, `/tasks/${this.$route.params.id}`);
       this.$store.commit('closeModal');
+    },
+    updateNote() {
+      const id = this.$store.state.modal.id;
+      const data = {
+        name: this.note.name,
+      };
+      noteService.update(this, id, data, `/tasks/${this.$route.params.id}`);
+      this.$store.commit('closeModal');
+    },
+  },
+  computed: {
+    note() {
+      return this.$store.state.modal.item;
     },
   },
   components: { TableLte, ModalLte },
