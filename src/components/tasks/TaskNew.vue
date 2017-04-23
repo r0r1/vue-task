@@ -63,6 +63,24 @@
                 </select>
               </div>
             </div>
+
+            <div class="form-group">
+              <label for="tags" class="col-sm-2 control-label">Tags</label>
+              <div class="col-sm-10">
+                <multiselect 
+                  v-model="tags" 
+                  tag-placeholder="Add this as new tag" 
+                  placeholder="Search or add a tag" 
+                  label="name" 
+                  track-by="code" 
+                  :options="options" 
+                  :multiple="true" 
+                  :taggable="true" 
+                  @tag="addTag">
+                </multiselect>
+              </div>
+            </div>
+
             
             <div class="form-group">
               <label for="description" class="col-sm-2 control-label">Description</label>
@@ -85,6 +103,7 @@
 </template>
 
 <script>
+import Multiselect from 'vue-multiselect';
 import taskService from './../../services/task';
 import userService from './../../services/user';
 
@@ -99,6 +118,7 @@ export default {
         status: null,
         priority: null,
         user: null,
+        tags: [],
       },
       priorities: [
         { text: '1', value: 1 },
@@ -115,11 +135,14 @@ export default {
       allUser: this.getUsers() || [],
       items: this.getParents() || [],
       errors: [],
+      tags: [],
+      options: [],
     };
   },
   methods: {
     addTask() {
       this.errors = [];
+      this.task.tags = this.tags;
       taskService.store(this, this.task, '/tasks/list');
     },
     getUsers() {
@@ -128,6 +151,19 @@ export default {
     getParents() {
       taskService.all(this, true);
     },
+    addTag(newTag) {
+      const tag = {
+        name: newTag,
+        code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000)),
+      };
+      this.options.push(tag);
+      this.tags.push(tag);
+    },
+  },
+  components: {
+    Multiselect,
   },
 };
 </script>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
