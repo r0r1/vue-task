@@ -79,10 +79,10 @@ export default {
       });
   },
 
-  update(context, id, data, redirect) {
+  update(context, data, id, redirect) {
     context.$http.put(`${TASK_URL}/${id}`, data, authService.getAuthHeader())
       .then((res) => {
-        if (res.data.id) {
+        if (res.data.ID) {
           context.$store.dispatch('addSuccessMessage', 'Update task has been successful.');
           router.replace(redirect);
         }
