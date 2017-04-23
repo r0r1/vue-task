@@ -32,17 +32,6 @@
             </div>
 
             <div class="form-group">
-              <label for="parent" class="col-sm-2 control-label">User</label>
-              <div class="col-sm-10">
-                <select class="form-control" v-model="task.user" id="user">
-                  <option v-for="u in allUser" v-bind:value="u">
-                    {{ u.name }}
-                  </option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
               <label for="priority_id" class="col-sm-2 control-label">Priority</label>
               <div class="col-sm-10">
                 <select class="form-control" v-model="task.priority" id="priority">
@@ -61,6 +50,23 @@
                     {{ s.text }}
                   </option>
                 </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="tags" class="col-sm-2 control-label">Tags</label>
+              <div class="col-sm-10">
+                <multiselect 
+                  v-model="tagSelected" 
+                  tag-placeholder="Add this as new tag" 
+                  placeholder="Search or add a tag" 
+                  label="name" 
+                  track-by="id" 
+                  :options="tags" 
+                  :multiple="true" 
+                  :taggable="true" 
+                  @tag="addTag">
+                </multiselect>
               </div>
             </div>
             
@@ -85,8 +91,10 @@
 </template>
 
 <script>
+import Multiselect from 'vue-multiselect';
 import taskService from './../../services/task';
 import userService from './../../services/user';
+import tagService from './../../services/tag';
 
 export default {
   name: 'TaskEdit',
@@ -99,6 +107,7 @@ export default {
         status: null,
         priority: null,
         user: {},
+        tags: [],
       },
       priorities: [
         { text: '1', value: 1 },
@@ -115,11 +124,13 @@ export default {
       allUser: this.getUsers() || [],
       items: this.getParents() || [],
       errors: [],
+      tags: this.getTag() || [],
     };
   },
   methods: {
     updateTask() {
       this.errors = [];
+      this.task.tags = this.tagSelected;
       taskService.update(this, this.task, this.$route.params.id, '/tasks/list');
     },
     getUsers() {
@@ -131,9 +142,30 @@ export default {
     getParents() {
       taskService.all(this);
     },
+    getTag() {
+      tagService.all(this);
+    },
+    addTag(newTag) {
+      const tag = {
+        name: newTag,
+        code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000)),
+      };
+      this.tags.push(tag);
+      this.tagSelected.push(tag);
+    },
   },
   created() {
     this.task = this.getTask();
   },
+  computed: {
+    tagSelected() {
+      return this.task.tags;
+    },
+  },
+  components: {
+    Multiselect,
+  },
 };
 </script>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
