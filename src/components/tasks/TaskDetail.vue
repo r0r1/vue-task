@@ -14,27 +14,27 @@
             <tbody>
               <tr>
                 <th>Id</th>
-                <td>: {{ item.ID }}</td>
+                <td>: {{ task.ID }}</td>
               </tr>
               <tr>
                 <th>Name</th>
-                <td>: {{ item.name }}</td>
+                <td>: {{ task.name }}</td>
               </tr>
               <!--<tr>
                 <th>User</th>
-                <td>: {{ item.User.name }}</td>
+                <td>: {{ task.User.name }}</td>
               </tr>-->
               <tr>
                 <th>Priority</th>
-                <td>: {{ item.priority }}</td>
+                <td>: {{ task.priority }}</td>
               </tr>
               <tr>
                 <th>Status</th>
-                <td>: {{ item.status }}</td>
+                <td>: {{ task.status }}</td>
               </tr>
               <tr>
                 <th>Description</th>
-                <td>: {{ item.description }}</td>
+                <td>: {{ task.description }}</td>
               </tr>
             </tbody>
           </table>
@@ -82,11 +82,12 @@ export default {
   name: 'TaskDetail',
   data() {
     return {
-      item: this.getTask() || {},
+      task: this.getTask() || {},
       notes: this.getNotes() || [],
       searchQuery: '',
       gridColumns: ['id', 'name', 'user'],
       itemActions: [
+        { name: 'update-item', label: '', icon: 'fa fa-edit', modal: true },
         { name: 'delete-item', label: '', icon: 'fa fa-trash-o', modal: true },
       ],
     };
@@ -102,6 +103,10 @@ export default {
       const id = this.$store.state.modal.id;
       noteService.destroy(this, id, `/tasks/${id}`);
     },
+  },
+  created() {
+    console.log('asd');
+    this.getTask();
   },
   components: { TableLte, ModalLte },
 };
